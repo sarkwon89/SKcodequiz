@@ -17,7 +17,7 @@ var questions = [{
   {
     title: "The condition in an if / else statement is enclosed within ____.",
     choices: ["Quotes", "Parentheses", "Curly brackets", "Square brackets"],
-    answer: "parentheses"
+    answer: "Parentheses"
   },
   {
     title: "What does HTML stand for?",
@@ -27,7 +27,7 @@ var questions = [{
 ];
 
 //you always need to start somewhere by creating a variable that equals 0
-var start = 0;
+var start;
 
 var timerInterval;
 
@@ -51,6 +51,7 @@ function hideElement() {
 }
 //this function starts the timer on the top right corner of the page
 function startTimer() {
+  start = 0;
   timerInterval = setInterval(function () {
     start++;
     console.log(start);
@@ -112,44 +113,11 @@ choicesbox.addEventListener("click", function (event) {
       RenderChoices()
     } else {
       alert("Wrong answer! Your timer increased by 10 secs.");
-      stopTimer();
-      updatedtime = start + 10;
-      console.log(updatedtime)
-      timer.textContent = "Time: " + updatedtime;
-      
-      // var updatedstart = start + 10;
-      // console.log("updated time: " + updatedstart);
-      // var updatedinterval = setInterval(function () {
-      //   updatedstart++;
-      //   timer.textContent = "Time: " + updatedstart;
-      // }, 1000);
+      start += 10;
+      console.log("start = " + start);
     };
   };
 });
-
-var updatedtime;
-
-function timeratnewvalue (){
-  timerInterval2 = setInterval(function () {
-    updatedtime++;
-    console.log(updatedtime);
-    timer.textContent = "Time: " + start;
-    console.log(timer);
-  }, 1000);
-}
-
-// var updatedstart = start + 10
-// console.log(updatedstart)
-
-// function add10secTimer () {
-//   updatedstart = start + 10;
-//   console.log("updated time: " + updatedstart);
-// }
-
-/*counter ++;
-RenderChoices();
-RenderQ(); */
-
 
 //Console log
 console.log("first choice in the array :" + questions[0].choices[0]);
