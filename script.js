@@ -23,6 +23,21 @@ var questions = [{
     choices: ["Home Tool Markup Language", "Hyperlinks and Text Markup Language ", "Hyper Text Markup Language"],
     answer: "Hyper Text Markup Language"
   },
+  {
+    title: "What is the HTML tag under which one can write the JavaScript code?",
+    choices: ["<javascript>", "<scripted>", "<script>", "<js>"],
+    answer: "<script>"
+  },
+  {
+    title: "You can only use the document method querySelector() in your javascript file to return the first Element within the document that matches the specified selector, or group of selectors. ",
+    choices: ["True", "False"],
+    answer: "False"
+  },
+  {
+    title: "What is the correct HTML for creating a hyperlink?",
+    choices: ["A>http://www.vbimedia.com", "A url='http://www.vbimedia.com'>VBIMEdia.com", "A href='http://www.vbimedia.com'>VBIMEDIA"],
+    answer: "A href='http://www.vbimedia.com'>VBIMEDIA"
+  },
 ];
 
 //created a global variable to store the value of my timer so I can dynamically update where my timer starts and adds to
