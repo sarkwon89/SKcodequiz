@@ -1,0 +1,44 @@
+body{
+    /*background-image: url(assets/background1.jpg)*/
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+    border: solid black;
+    height: 10vh;
+}
+
+#highscore {
+    margin: 20px;
+}
+
+#timer {
+    margin: 20px;
+}
+
+.container {
+    border: solid rebeccapurple;
+    text-align: center;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(87, 85, 85, 0.692);
+}
+
+img {
+    width:65px;
+    height:65px;
+}
+
+.choicesbox{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+
