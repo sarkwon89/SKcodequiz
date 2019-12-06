@@ -6,7 +6,6 @@ var h1 = document.querySelector("h1");
 var image = document.querySelector("img");
 var choicesbox = document.querySelector(".choicesbox");
 var button = document.querySelector("button");
-var col = document.querySelector(".col-md-12");
 
 //code questions in an array defined as objects with multiple properties
 var questions = [{
@@ -26,9 +25,10 @@ var questions = [{
   },
 ];
 
-//you always need to start somewhere by creating a variable that equals 0
+//created a global variable to store the value of my timer so I can dynamically update where my timer starts and adds to
 var start;
 
+//in order to stop the timer I need a global variable to reference it in two functions
 var timerInterval;
 
 //this event starts the timer
@@ -89,6 +89,7 @@ function RenderChoices() {
 }
 
 //check if answer is correct and render the next button if the answer is correct
+//running a click event method on the choicesbox div
 choicesbox.addEventListener("click", function (event) {
   //creating variable for property Answer that is in the object array "questions"
   var correctAnswer = questions[counter].answer;
@@ -120,5 +121,3 @@ choicesbox.addEventListener("click", function (event) {
 });
 
 //Console log
-console.log("first choice in the array :" + questions[0].choices[0]);
-console.log("first question :" + questions[0].title);
