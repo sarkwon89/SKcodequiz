@@ -82,6 +82,8 @@ function stopTimer() {
 
 //MUST always have a counter to start from
 var counter = 0
+var counter2 = counter-1;
+var lengthofquestion = questions.length
 
 //Render the question(object) title property
 function RenderQ() {
@@ -93,6 +95,7 @@ function RenderQ() {
 //Render the question(object) choices property
 function RenderChoices() {
   var C = questions[counter].choices;
+  choicesbox.textContent = '';
   console.log("all the choices :" + C);
   for (var i = 0; i < C.length; i++) {
     console.log(i);
@@ -100,10 +103,13 @@ function RenderChoices() {
     choicesbutton.textContent = questions[counter].choices[i];
     choicesbox.appendChild(choicesbutton);
     choicesbutton.setAttribute("class", "submitbutton")
-  }
+  };
+
+
+
 }
 
-//check if answer is correct and render the next button if the answer is correct
+//check if answer is correct. if the answer is correct render the next set of choices & questions. If false then alert and add 10 secs.
 //running a click event method on the choicesbox div
 choicesbox.addEventListener("click", function (event) {
   //creating variable for property Answer that is in the object array "questions"
@@ -121,12 +127,21 @@ choicesbox.addEventListener("click", function (event) {
       alert("YAY!!");
       var choiceChildren = event.target.parentElement.children;
       console.log(choiceChildren);
-      for (var i = 0; i < choiceChildren.length; i++) {
-        choiceChildren[i].style.display = "none";
-      };
+      // for (var i = 0; i < choiceChildren.length; i++) {
+      //   choiceChildren[i].style.display = "none";
+      // };
       counter++;
-      RenderQ();
-      RenderChoices()
+      console.log(counter);
+      //nested if statement to check once the answer is true if the counter is less than the array
+      if(counter<questions.length){
+        RenderQ();
+        RenderChoices();
+      } else {
+        stopTimer();
+        box.style.display = "none";
+        localStorage.setItem("score", start)
+        console.log(start) 
+      }
     } else {
       alert("Wrong answer! Your timer increased by 10 secs.");
       start += 10;
@@ -134,5 +149,14 @@ choicesbox.addEventListener("click", function (event) {
     };
   };
 });
+
+
+//when the user is done with the quiz
+//stop the timer
+//grab the value in the timer element
+//alert "This is your score"
+//store that value in your local storage
+//display the score in the highscore page
+
 
 //Console log
