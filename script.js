@@ -39,11 +39,11 @@ var questions = [{
     choices: ["True", "False"],
     answer: "False"
   },
-  {
-    title: "What is the correct HTML for creating a hyperlink?",
-    choices: ["A>http://www.vbimedia.com", "A url='http://www.vbimedia.com'>VBIMEdia.com", "A href='http://www.vbimedia.com'>VBIMEDIA"],
-    answer: "A href='http://www.vbimedia.com'>VBIMEDIA"
-  },
+  // {
+  //   title: "What is the correct HTML for creating a hyperlink?",
+  //   choices: ["A>http://www.vbimedia.com", "A url='http://www.vbimedia.com'>VBIMEdia.com", "A href='http://www.vbimedia.com'>VBIMEDIA"],
+  //   answer: "A href='http://www.vbimedia.com'>VBIMEDIA"
+  // },
 ];
 
 //created a global variable to store the value of my timer so I can dynamically update where my timer starts and adds to
@@ -156,8 +156,6 @@ choicesbox.addEventListener("click", function (event) {
         //show score and userinput. hide elements
         displayscoreinput();
         form.addEventListener("submit", function (event) {
-          event.preventDefault();
-
           initials = userInput.value.trim();
           
           console.log("score array 1 = " + JSON.stringify(score));

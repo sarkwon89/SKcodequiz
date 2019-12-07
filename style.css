@@ -41,4 +41,12 @@ img {
     margin-right: 20%;
 }
 
+@media only screen and (max-width: 800px) {
+    h1 {
+      font-size: x-large;
+    }
+    img{
+        display: none;
+    }
+  }
 
