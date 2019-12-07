@@ -6,6 +6,12 @@ var h1 = document.querySelector("h1");
 var image = document.querySelector("img");
 var choicesbox = document.querySelector(".choicesbox");
 var button = document.querySelector("button");
+var form = document.querySelector("form")
+var userScore = document.querySelector("#userscore");
+var userInput = document.querySelector("#addyourself");
+
+form.style.display = "none";
+
 
 //code questions in an array defined as objects with multiple properties
 var questions = [{
@@ -82,8 +88,6 @@ function stopTimer() {
 
 //MUST always have a counter to start from
 var counter = 0
-var counter2 = counter-1;
-var lengthofquestion = questions.length
 
 //Render the question(object) title property
 function RenderQ() {
@@ -107,6 +111,16 @@ function RenderChoices() {
 
 
 
+}
+
+//created an object array to keep track of scores and initials
+var score = [];
+if(localStorage.getItem("score")){
+  console.log("LOCAL STORAGE = TRUE");
+  score = JSON.parse(localStorage.getItem("score"));
+  console.log("score = " + JSON.stringify(score));
+}else{
+  score = [];
 }
 
 //check if answer is correct. if the answer is correct render the next set of choices & questions. If false then alert and add 10 secs.
@@ -133,14 +147,31 @@ choicesbox.addEventListener("click", function (event) {
       counter++;
       console.log(counter);
       //nested if statement to check once the answer is true if the counter is less than the array
-      if(counter<questions.length){
+      if (counter < questions.length) {
         RenderQ();
         RenderChoices();
       } else {
+        //stop timer
         stopTimer();
-        box.style.display = "none";
-        localStorage.setItem("score", start)
-        console.log(start) 
+        //show score and userinput. hide elements
+        displayscoreinput();
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          initials = userInput.value.trim();
+          
+          console.log("score array 1 = " + JSON.stringify(score));
+
+          score.push({
+            "score": start,
+            "name": initials
+          });
+
+          console.log("score array 2 = " + JSON.stringify(score));
+
+          localStorage.setItem("score", JSON.stringify(score));
+
+        });
       }
     } else {
       alert("Wrong answer! Your timer increased by 10 secs.");
@@ -149,6 +180,18 @@ choicesbox.addEventListener("click", function (event) {
     };
   };
 });
+
+
+
+//hide elements and display form
+function displayscoreinput() {
+  choicesbox.style.display = "none";
+  h1.style.display = "none";
+  userScore.textContent = "Your score is " + start;
+  console.log(start);
+  form.style.display = "";
+}
+
 
 
 //when the user is done with the quiz
