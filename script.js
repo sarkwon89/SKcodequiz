@@ -9,6 +9,9 @@ var button = document.querySelector("button");
 var form = document.querySelector("form")
 var userScore = document.querySelector("#userscore");
 var userInput = document.querySelector("#addyourself");
+var highscore = document.querySelector("#highscore");
+var nav = document.querySelector("nav");
+
 
 form.style.display = "none";
 
@@ -115,11 +118,11 @@ function RenderChoices() {
 
 //created an object array to keep track of scores and initials
 var score = [];
-if(localStorage.getItem("score")){
+if (localStorage.getItem("score")) {
   console.log("LOCAL STORAGE = TRUE");
   score = JSON.parse(localStorage.getItem("score"));
   console.log("score = " + JSON.stringify(score));
-}else{
+} else {
   score = [];
 }
 
@@ -138,7 +141,7 @@ choicesbox.addEventListener("click", function (event) {
     console.log(event.target.textContent);
     //another if/else statement with a for loop to identify if the text in the button matchs the correct answer and if it does hide the buttons and run the next set of questions and choices dyanmically
     if (event.target.textContent === correctAnswer) {
-      alert("YAY!!");
+      alert("Woohoo!");
       var choiceChildren = event.target.parentElement.children;
       console.log(choiceChildren);
       // for (var i = 0; i < choiceChildren.length; i++) {
@@ -157,18 +160,14 @@ choicesbox.addEventListener("click", function (event) {
         displayscoreinput();
         form.addEventListener("submit", function (event) {
           initials = userInput.value.trim();
-          
           console.log("score array 1 = " + JSON.stringify(score));
-
           score.push({
             "score": start,
             "name": initials
           });
-
           console.log("score array 2 = " + JSON.stringify(score));
-
           localStorage.setItem("score", JSON.stringify(score));
-
+          window.location.reload(true);
         });
       }
     } else {
@@ -179,8 +178,6 @@ choicesbox.addEventListener("click", function (event) {
   };
 });
 
-
-
 //hide elements and display form
 function displayscoreinput() {
   choicesbox.style.display = "none";
@@ -188,16 +185,53 @@ function displayscoreinput() {
   userScore.textContent = "Your score is " + start;
   console.log(start);
   form.style.display = "";
+};
+
+var container = document.querySelector(".container");
+var scorecontainer = document.querySelector(".scorecontainer");
+var scorebox = document.querySelector("#scorebox");
+var goback = document.querySelector("#goback");
+var view = document.querySelector("#view");
+
+//when user clicks "View Highscore" it runs the display scoreboard and loadscore function
+highscore.addEventListener("click", function(event) {
+      displayscoreboard();
+      loadscore();
+      view.style.display = "none";
+      goback.textContent = "< Go Back";
+
+});
+
+//when user clicks on "go back" it reload the page and return to the previous page
+goback.addEventListener("click", function(event){
+  window.history.back();
+})
+
+//Display scoreboard div
+function displayscoreboard() {
+  container.style.display = "none";
+      scorecontainer.style.display = "";
+      scorebox.textContent = "Scoreboard";
 }
+      
+//loads the object array of score
+function loadscore (){
+  for(var i=0;i<score.length;++i){
+      var newLI = document.createElement("li");
+      newLI.textContent = JSON.stringify(score[i]);
+      scorebox.appendChild(newLI);
+
+      var clearbutton = document.createElement("button");
+      clearbutton.textContent = "Clear score";
+      newLI.append(clearbutton);
+     }};
+
+      //when the user is done with the quiz
+      //stop the timer
+      //grab the value in the timer element
+      //alert "This is your score"
+      //store that value in your local storage
+      //display the score in the highscore page
 
 
-
-//when the user is done with the quiz
-//stop the timer
-//grab the value in the timer element
-//alert "This is your score"
-//store that value in your local storage
-//display the score in the highscore page
-
-
-//Console log
+      //Console log
