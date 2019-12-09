@@ -251,7 +251,9 @@ function displayscoreboard() {
 function loadscore() {
   for (var i = 0; i < score.length; ++i) {
     var newLI = document.createElement("li");
-    newLI.innerHTML = JSON.stringify(score[i]) + "<button>Clear Score</button>";
+    //newLI.innerHTML = JSON.stringify(score[i]) + "<button>Clear Score</button>";
+    console.log(score[i].name + score[i].score);
+    newLI.innerHTML = "Name: " + score[i].name + "| Score: " + score[i].score + "<button>Clear Score</button>";
     newLI.setAttribute("data-index", i);
     scorebox.appendChild(newLI);
   }
