@@ -55,13 +55,16 @@ button{
     border: solid #DF8000;
     padding: 2%;
     margin: 1px;
-
 }
 
 #scorebox{
-    background-color: white;
-    font-size: large;
+    background-color: rgba(133, 107, 80, 0.692);
+    font-size: 50px;
 
+}
+
+li{
+    font-size: 15px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -76,6 +79,16 @@ button{
         }
     #highscore{
         font-size: 15px
+    }
+    #scorebox{
+        font-size: 30px;
+    }
+    li{
+        font-size: 15px;
+    }
+    .scorecontainer{
+        margin-left: 5%;
+        margin-right: 5%;
     }
   }
 
