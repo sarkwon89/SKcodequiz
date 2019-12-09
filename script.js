@@ -16,6 +16,7 @@ var scorecontainer = document.querySelector(".scorecontainer");
 var scorebox = document.querySelector("#scorebox");
 var goback = document.querySelector("#goback");
 var view = document.querySelector("#view");
+var scoreheader = document.querySelector("#scoreheader")
 
 //code questions in an array defined as objects with multiple properties
 var questions = [{
@@ -172,12 +173,19 @@ scorebox.addEventListener("click", function (event) {
     // Get its data-index value and remove the todo element from the list
     var index = element.parentElement.dataset.index;
     console.log("position of element" + index)
-    score.splice(index, 0);
+    score.splice(index, 1);
     console.log("object array " + JSON.stringify(score));
+    //
 
-    // Re-render the scoreboard
+    // store changes to local storage
+    localStorage.setItem("score", JSON.stringify(score));
+    // clear scorebox
+    scorebox.textContent = "";
+    // render updated score
+    loadscore();
   }
 })
+
 
 
 
@@ -237,8 +245,8 @@ function RenderChoices() {
 //Display scoreboard div
 function displayscoreboard() {
   container.style.display = "none";
-  scorebox.style.display = "";
-  scorebox.textContent = "Scoreboard";
+  scorecontainer.style.display = "";
+  scoreheader.textContent = "Scoreboard"
 }
 
 //loads the object array of score
