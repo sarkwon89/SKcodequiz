@@ -175,8 +175,6 @@ scorebox.addEventListener("click", function (event) {
     console.log("position of element" + index)
     score.splice(index, 1);
     console.log("object array " + JSON.stringify(score));
-    //
-
     // store changes to local storage
     localStorage.setItem("score", JSON.stringify(score));
     // clear scorebox

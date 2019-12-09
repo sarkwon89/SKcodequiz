@@ -1,4 +1,4 @@
-body{
+body {
     background: url(assets/StockSnap_HTZCYUGSPW.jpg) no-repeat center;
     font-family: 'Bitter', serif;
 }
@@ -16,7 +16,7 @@ nav {
     font-size: 30px;
     font-weight: bold;
     text-decoration: "none";
-    color:rgb(95, 77, 58);
+    color: rgb(95, 77, 58);
 
 }
 
@@ -30,67 +30,74 @@ nav {
 
 .container {
     text-align: center;
-    height: 70vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.choicesbox{
+.choicesbox {
     display: flex;
     flex-direction: column;
     margin-left: 20%;
     margin-right: 20%;
 }
 
-.scorecontainer{
+#userscore {
+    font-size: 30px;
+}
+
+.scorecontainer {
     display: flex;
     flex-direction: column;
     margin-left: 20%;
     margin-right: 20%;
 }
 
-button{
+button {
     background-color: white;
     border: solid #DF8000;
     padding: 5px;
     margin: 1px;
 }
 
-#scoreheader{
-    font-size:50px;
+#scoreheader {
+    font-size: 50px;
 }
 
-#scorebox{
+#scorebox {
     background-color: rgba(133, 107, 80, 0.692);
 }
 
-li{
+li {
     font-size: 15px;
 }
 
 @media only screen and (max-width: 800px) {
     h1 {
-      font-size: x-large;
+        font-size: x-large;
     }
-  }
+}
 
-  @media only screen and (max-width: 600px) {
-    #timer{
-        font-size: 15px
-        }
-    #highscore{
-        font-size: 15px
+@media only screen and (max-width: 600px) {
+    #timer {
+        font-size: 20px
     }
-    #scoreheader{
+
+    #highscore {
+        font-size: 20px
+    }
+
+    #scoreheader {
         font-size: 30px;
     }
-    li{
+
+    li {
         font-size: 15px;
     }
-    .scorecontainer{
+
+    .scorecontainer {
         margin-left: 5%;
         margin-right: 5%;
     }
-  }
-
+}
