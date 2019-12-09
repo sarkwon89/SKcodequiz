@@ -32,8 +32,9 @@ nav {
     text-align: center;
     height: 90vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    top: 100px;
+
 }
 
 .choicesbox {
