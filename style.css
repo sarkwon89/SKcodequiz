@@ -1,5 +1,6 @@
 body{
-    /*background-image: url(assets/background1.jpg)*/
+    background: url(assets/StockSnap_HTZCYUGSPW.jpg) no-repeat center;
+    font-family: 'Bitter', serif;
 }
 
 nav {
@@ -7,31 +8,32 @@ nav {
     justify-content: space-between;
     padding-left: 5%;
     padding-right: 5%;
-    border: solid black;
     height: 10vh;
 }
 
 #highscore {
     margin: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: "none";
+    color:rgb(95, 77, 58);
+
 }
 
 #timer {
     margin: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Bitter', serif;
+
 }
 
 .container {
-    border: solid rebeccapurple;
     text-align: center;
-    height: 80vh;
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(87, 85, 85, 0.692);
-}
-
-img {
-    width:65px;
-    height:65px;
 }
 
 .choicesbox{
@@ -46,7 +48,19 @@ img {
     flex-direction: column;
     margin-left: 20%;
     margin-right: 20%;
-    border: solid red
+}
+
+button{
+    background-color: white;
+    border: solid #DF8000;
+    padding: 2%;
+    margin: 1px;
+
+}
+
+#scorebox{
+    background-color: white;
+    font-size: large;
 
 }
 
@@ -54,8 +68,14 @@ img {
     h1 {
       font-size: x-large;
     }
-    img{
-        display: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+    #timer{
+        font-size: 15px
+        }
+    #highscore{
+        font-size: 15px
     }
   }
 

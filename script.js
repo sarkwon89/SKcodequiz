@@ -1,9 +1,9 @@
+//MY VARIABLES
 var startQuiz = document.querySelector("#startquiz");
 var timer = document.querySelector("#timer");
 var ptag = document.querySelector("p");
 var box = document.querySelector(".col-md-12");
 var h1 = document.querySelector("h1");
-var image = document.querySelector("img");
 var choicesbox = document.querySelector(".choicesbox");
 var button = document.querySelector("button");
 var form = document.querySelector("form")
@@ -11,10 +11,11 @@ var userScore = document.querySelector("#userscore");
 var userInput = document.querySelector("#addyourself");
 var highscore = document.querySelector("#highscore");
 var nav = document.querySelector("nav");
-
-
-form.style.display = "none";
-
+var container = document.querySelector(".container");
+var scorecontainer = document.querySelector(".scorecontainer");
+var scorebox = document.querySelector("#scorebox");
+var goback = document.querySelector("#goback");
+var view = document.querySelector("#view");
 
 //code questions in an array defined as objects with multiple properties
 var questions = [{
@@ -52,8 +53,36 @@ var questions = [{
 //created a global variable to store the value of my timer so I can dynamically update where my timer starts and adds to
 var start;
 
+//MUST always have a counter to start from
+var counter = 0
+
 //in order to stop the timer I need a global variable to reference it in two functions
 var timerInterval;
+
+//created an object array to keep track of scores and initials
+var score = [];
+
+
+
+
+//AT PAGE LOAD
+
+//when page loads hide form element
+form.style.display = "none";
+
+//when page loads browser pulls object stored in local storage if available
+if (localStorage.getItem("score")) {
+  console.log("LOCAL STORAGE = TRUE");
+  score = JSON.parse(localStorage.getItem("score"));
+  console.log("score = " + JSON.stringify(score));
+} else {
+  score = [];
+}
+
+
+
+
+//ALL MY CLICK EVENTS
 
 //this event starts the timer
 startQuiz.addEventListener("click", startTimer);
@@ -66,65 +95,6 @@ startQuiz.addEventListener("click", RenderQ);
 
 //this event renders the first set of choices in the var question's array
 startQuiz.addEventListener("click", RenderChoices);
-
-//this function hides the some elements when the user clicks "start quiz"
-function hideElement() {
-  image.style.display = "none";
-  ptag.style.display = "none";
-  startQuiz.style.display = "none";
-}
-//this function starts the timer on the top right corner of the page
-function startTimer() {
-  start = 0;
-  timerInterval = setInterval(function () {
-    start++;
-    console.log(start);
-    timer.textContent = "Time: " + start;
-    console.log(timer);
-  }, 1000);
-}
-
-//this function stops the timer
-function stopTimer() {
-  clearInterval(timerInterval)
-}
-
-//MUST always have a counter to start from
-var counter = 0
-
-//Render the question(object) title property
-function RenderQ() {
-  h1.textContent = questions[counter].title;
-  h1.style.textAlign = "none";
-  choicesbox.style.textAlign = "none";
-}
-
-//Render the question(object) choices property
-function RenderChoices() {
-  var C = questions[counter].choices;
-  choicesbox.textContent = '';
-  console.log("all the choices :" + C);
-  for (var i = 0; i < C.length; i++) {
-    console.log(i);
-    var choicesbutton = document.createElement("button");
-    choicesbutton.textContent = questions[counter].choices[i];
-    choicesbox.appendChild(choicesbutton);
-    choicesbutton.setAttribute("class", "submitbutton")
-  };
-
-
-
-}
-
-//created an object array to keep track of scores and initials
-var score = [];
-if (localStorage.getItem("score")) {
-  console.log("LOCAL STORAGE = TRUE");
-  score = JSON.parse(localStorage.getItem("score"));
-  console.log("score = " + JSON.stringify(score));
-} else {
-  score = [];
-}
 
 //check if answer is correct. if the answer is correct render the next set of choices & questions. If false then alert and add 10 secs.
 //running a click event method on the choicesbox div
@@ -178,7 +148,42 @@ choicesbox.addEventListener("click", function (event) {
   };
 });
 
-//hide elements and display form
+//when user clicks "View Highscore" it runs the display scoreboard and loadscore function
+highscore.addEventListener("click", function (event) {
+  displayscoreboard();
+  loadscore();
+  view.style.display = "none";
+  goback.textContent = "< Go Back";
+  timer.style.display = "none";
+});
+
+//when user clicks on "go back" it reload the page and return to the previous page
+goback.addEventListener("click", function (event) {
+  window.location.reload(true);
+})
+
+//when user clicks "clear score" button. Removes from local storage
+scorebox.addEventListener("click", function (event) {
+  var element = event.target;
+  console.log(element);
+
+  // If that element is a button...
+  if (element.matches("button") === true) {
+    // Get its data-index value and remove the todo element from the list
+    var index = element.parentElement.dataset.index;
+    console.log("position of element" + index)
+    score.splice(index, 0);
+    console.log("object array " + JSON.stringify(score));
+
+    // Re-render the scoreboard
+  }
+})
+
+
+
+//ALL MY FUNCTIONS
+
+//hide elements and display form element
 function displayscoreinput() {
   choicesbox.style.display = "none";
   h1.style.display = "none";
@@ -187,51 +192,64 @@ function displayscoreinput() {
   form.style.display = "";
 };
 
-var container = document.querySelector(".container");
-var scorecontainer = document.querySelector(".scorecontainer");
-var scorebox = document.querySelector("#scorebox");
-var goback = document.querySelector("#goback");
-var view = document.querySelector("#view");
+//this function hides the some elements when the user clicks "start quiz"
+function hideElement() {
+  ptag.style.display = "none";
+  startQuiz.style.display = "none";
+}
 
-//when user clicks "View Highscore" it runs the display scoreboard and loadscore function
-highscore.addEventListener("click", function(event) {
-      displayscoreboard();
-      loadscore();
-      view.style.display = "none";
-      goback.textContent = "< Go Back";
+//this function starts the timer on the top right corner of the page
+function startTimer() {
+  start = 0;
+  timerInterval = setInterval(function () {
+    start++;
+    console.log(start);
+    timer.textContent = "Time: " + start;
+    console.log(timer);
+  }, 1000);
+}
 
-});
+//this function stops the timer
+function stopTimer() {
+  clearInterval(timerInterval)
+}
+//Render the question(object) title property
+function RenderQ() {
+  h1.textContent = questions[counter].title;
+  h1.style.textAlign = "none";
+  choicesbox.style.textAlign = "none";
+}
 
-//when user clicks on "go back" it reload the page and return to the previous page
-goback.addEventListener("click", function(event){
-  window.history.back();
-})
+//Render the question(object) choices property
+function RenderChoices() {
+  var C = questions[counter].choices;
+  choicesbox.textContent = '';
+  console.log("all the choices :" + C);
+  for (var i = 0; i < C.length; i++) {
+    console.log(i);
+    var choicesbutton = document.createElement("button");
+    choicesbutton.textContent = questions[counter].choices[i];
+    choicesbox.appendChild(choicesbutton);
+    choicesbutton.setAttribute("class", "submitbutton")
+  };
+}
 
 //Display scoreboard div
 function displayscoreboard() {
   container.style.display = "none";
-      scorecontainer.style.display = "";
-      scorebox.textContent = "Scoreboard";
+  scorebox.style.display = "";
+  scorebox.textContent = "Scoreboard";
 }
-      
+
 //loads the object array of score
-function loadscore (){
-  for(var i=0;i<score.length;++i){
-      var newLI = document.createElement("li");
-      newLI.textContent = JSON.stringify(score[i]);
-      scorebox.appendChild(newLI);
-
-      var clearbutton = document.createElement("button");
-      clearbutton.textContent = "Clear score";
-      newLI.append(clearbutton);
-     }};
-
-      //when the user is done with the quiz
-      //stop the timer
-      //grab the value in the timer element
-      //alert "This is your score"
-      //store that value in your local storage
-      //display the score in the highscore page
+function loadscore() {
+  for (var i = 0; i < score.length; ++i) {
+    var newLI = document.createElement("li");
+    newLI.innerHTML = JSON.stringify(score[i]) + "<button>Clear Score</button>";
+    newLI.setAttribute("data-index", i);
+    scorebox.appendChild(newLI);
+  }
+};
 
 
-      //Console log
+//Console log
